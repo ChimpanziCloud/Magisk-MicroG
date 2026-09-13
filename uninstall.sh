@@ -25,11 +25,11 @@ done
 SYS_PATHS="
 system/priv-app/GmsCore
 system/priv-app/Phonesky
-system/priv-app/GsfProxy
+system/priv-app/GoogleServicesFramework
 system/etc/permissions/privapp-permissions-microg.xml
 product/priv-app/GmsCore
 product/priv-app/Phonesky
-product/priv-app/GsfProxy
+product/priv-app/GoogleServicesFramework
 "
 
 for sys_path in $SYS_PATHS; do
