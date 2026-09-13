@@ -1,0 +1,17 @@
+#!/system/bin/sh
+# Standard Magisk / KernelSU / APatch update-binary shim
+UMASK=0022
+eval $(cat /data/adb/magisk/util_functions.sh 2>/dev/null)
+eval $(cat /data/adb/ksu/util_functions.sh 2>/dev/null)
+eval $(cat /data/adb/ap/util_functions.sh 2>/dev/null)
+
+[ -z "$ZIPFILE" ] && ZIPFILE="$2"
+[ -z "$OUTFD" ] && OUTFD="$1"
+
+# Run customize.sh if present
+unzip -o "$ZIPFILE" 'customize.sh' -d "$TMPDIR" >/dev/null 2>&1
+if [ -f "$TMPDIR/customize.sh" ]; then
+    . "$TMPDIR/customize.sh"
+fi
+
+exit 0

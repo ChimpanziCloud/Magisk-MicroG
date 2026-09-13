@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <!-- Declare GMS source permissions required by Android 14/15 AppIdPermissionPolicy -->
+    <permission name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" package="com.google.android.gms" protection="normal" />
+    <permission name="com.google.android.gms.permission.CAR" package="com.google.android.gms" protection="normal" />
+    <permission name="com.google.android.gms.permission.TRANSFER_BODY_SENSORS" package="com.google.android.gms" protection="normal" />
+
+    <!-- Privileged permission whitelist for microG GmsCore -->
+    <privapp-permissions package="com.google.android.gms">
+        <permission name="android.permission.ACCESS_FINE_LOCATION"/>
+        <permission name="android.permission.ACCESS_COARSE_LOCATION"/>
+        <permission name="android.permission.CHANGE_DEVICE_IDLE_WHITELIST"/>
+        <permission name="android.permission.CHANGE_DEVICE_IDLE_TEMP_WHITELIST"/>
+        <permission name="android.permission.DUMP"/>
+        <permission name="android.permission.LOCATION_HARDWARE"/>
+        <permission name="android.permission.MODIFY_AUDIO_ROUTING"/>
+        <permission name="android.permission.MODIFY_PHONE_STATE"/>
+        <permission name="android.permission.OBSERVE_GRANT_REVOKE_PERMISSIONS"/>
+        <permission name="android.permission.PACKAGE_USAGE_STATS"/>
+        <permission name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
+        <permission name="android.permission.REAL_GET_TASKS"/>
+        <permission name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+        <permission name="android.permission.START_ACTIVITIES_FROM_BACKGROUND"/>
+        <permission name="android.permission.SUBSTITUTE_NOTIFICATION_APP_NAME"/>
+        <permission name="android.permission.UPDATE_DEVICE_STATS"/>
+        <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
+        <permission name="android.permission.WRITE_GSERVICES"/>
+        <permission name="android.permission.FAKE_PACKAGE_SIGNATURE"/>
+        <permission name="android.permission.PROVIDE_REMOTE_CREDENTIALS"/>
+        <permission name="android.permission.PROVIDE_DEFAULT_ENABLED_CREDENTIAL_SERVICE"/>
+        <permission name="android.permission.MANAGE_USB"/>
+        <permission name="android.permission.UPDATE_APP_OPS_STATS"/>
+        <permission name="android.permission.INSTALL_LOCATION_PROVIDER"/>
+        <permission name="android.permission.INTERACT_ACROSS_USERS"/>
+        <permission name="android.permission.NETWORK_SCAN"/>
+        <permission name="android.permission.WATCH_APPOPS"/>
+    </privapp-permissions>
+
+    <!-- FakeStore (com.android.vending) -->
+    <privapp-permissions package="com.android.vending">
+        <permission name="android.permission.FAKE_PACKAGE_SIGNATURE"/>
+        <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
+        <permission name="android.permission.INSTALL_PACKAGES"/>
+        <permission name="android.permission.DELETE_PACKAGES"/>
+        <permission name="android.permission.INTERACT_ACROSS_USERS"/>
+    </privapp-permissions>
+
+    <!-- GSF Proxy (com.google.android.gsf) -->
+    <privapp-permissions package="com.google.android.gsf">
+        <permission name="android.permission.WRITE_SECURE_SETTINGS"/>
+        <permission name="android.permission.WRITE_GSERVICES"/>
+    </privapp-permissions>
+</permissions>
