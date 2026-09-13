@@ -14,3 +14,4 @@ features include: one click installation of microg, support for android 16, back
 
 for any queries, contact me on discord, my username is 6xcloud (send a friend request first)
 
+"THE SERVICES ARE PROVIDED 'AS IS' AND 'AS AVAILABLE' WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT."
