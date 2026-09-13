@@ -3,7 +3,7 @@
 
 ui_print "**********************************************"
 ui_print "  Systemless GMS Remover + microG Installer   "
-ui_print "                  v1.9                        "
+ui_print "                  v2.1                        "
 ui_print "**********************************************"
 
 # Check if module is already installed on system
@@ -62,7 +62,7 @@ if [ "$ALREADY_INSTALLED" = false ]; then
             local target_dir="$MODPATH/$rel_path"
             
             case "$rel_path" in
-                system/priv-app/GmsCore|system/priv-app/FakeStore|system/priv-app/GsfProxy)
+                system/priv-app/GmsCore|system/priv-app/Phonesky|system/priv-app/GsfProxy)
                     ;;
                 *)
                     ui_print "  [+] Hiding system folder: $sys_dir"
