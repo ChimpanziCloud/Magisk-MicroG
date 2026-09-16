@@ -24,12 +24,12 @@ done
 # 2. Back up system / product app files if present
 SYS_PATHS="
 system/priv-app/GmsCore
-system/priv-app/Phonesky
-system/priv-app/GoogleServicesFramework
+system/priv-app/FakeStore
+system/priv-app/GsfProxy
 system/etc/permissions/privapp-permissions-microg.xml
 product/priv-app/GmsCore
-product/priv-app/Phonesky
-product/priv-app/GoogleServicesFramework
+product/priv-app/FakeStore
+product/priv-app/GsfProxy
 "
 
 for sys_path in $SYS_PATHS; do

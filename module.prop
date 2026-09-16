@@ -1,6 +1,6 @@
-id=systemless-gms-remover-microg
-name=Systemless GMS Remover & microG Installer
-version=v2.3
-versionCode=14
-author=ChimpanziCloud, Antigravity
+id=magisk-microg
+name=Magisk microG Installer
+version=v2.0
+versionCode=20
+author=Antigravity & Cloud
 description=Systemlessly Install MicroG

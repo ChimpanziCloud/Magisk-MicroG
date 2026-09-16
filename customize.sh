@@ -3,7 +3,7 @@
 
 ui_print "**********************************************"
 ui_print "  Systemless GMS Remover + microG Installer   "
-ui_print "                  v2.3                        "
+ui_print "                  v1.9                        "
 ui_print "**********************************************"
 
 # Check if module is already installed on system
@@ -46,15 +46,14 @@ if [ "$ALREADY_INSTALLED" = false ]; then
         ui_print "- No GMS / microG backup archive found in /data/backup."
     fi
 
-    # 2. Deep clean stock GMS/Play Store update binaries from /data/app (including Android 11-15 ~~hash subdirs)
-    ui_print "- Deep cleaning stock GMS/Play Store update binaries from /data/app..."
-    find /data/app -maxdepth 3 -type d \( -name "*com.google.android.gms*" -o -name "*com.android.vending*" -o -name "*com.google.android.gsf*" \) 2>/dev/null | while read -r app_dir; do
-        ui_print "  [-] Removing update directory: $app_dir"
-        rm -rf "$app_dir"
-    done
+    # 2. Clean leftover stock GMS updates from /data/app (without marking packages uninstalled for user 0)
+    ui_print "- Cleaning stock GMS/Play Store update binaries from /data/app..."
+    rm -rf /data/app/*com.google.android.gms* >/dev/null 2>&1
+    rm -rf /data/app/*com.google.android.gsf* >/dev/null 2>&1
+    rm -rf /data/app/*com.android.vending* >/dev/null 2>&1
 
-    # 3. Systemlessly hide stock GMS system folders across ALL partitions (/system, /product, /system_ext, /vendor)
-    ui_print "- Systemlessly hiding stock GMS system directories across all partitions..."
+    # 3. Systemlessly hide stock GMS system folders
+    ui_print "- Systemlessly hiding stock GMS system directories..."
 
     remove_systemless_dir() {
         local sys_dir="$1"
@@ -62,13 +61,11 @@ if [ "$ALREADY_INSTALLED" = false ]; then
             local rel_path="${sys_dir#/}"
             local target_dir="$MODPATH/$rel_path"
             
-            # Only skip creating .replace if this exact path is where our module mounts microG APKs
             case "$rel_path" in
                 system/priv-app/GmsCore|system/priv-app/Phonesky|system/priv-app/GoogleServicesFramework)
-                    ui_print "  [=] Replacing with microG module files: $sys_dir"
                     ;;
                 *)
-                    ui_print "  [+] Hiding stock system folder: $sys_dir"
+                    ui_print "  [+] Hiding system folder: $sys_dir"
                     mkdir -p "$target_dir"
                     touch "$target_dir/.replace"
                     ;;
@@ -99,8 +96,6 @@ GoogleOneTimeInitializer
 GoogleContactsSyncAdapter
 GoogleCalendarSyncAdapter
 SetupWizard
-AndroidAutoStarter
-GoogleLocationHistory
 "
 
     for base in $SEARCH_DIRS; do
@@ -111,10 +106,10 @@ GoogleLocationHistory
         done
     done
 
-    # Deep search for any remaining GMS APK directories across partitions
-    for base in /system /product /system_ext /vendor; do
+    # Deep search for GMS APKs
+    for base in /system /product /system_ext; do
         if [ -d "$base" ]; then
-            find "$base" -maxdepth 4 -type f \( -name "*GmsCore*.apk" -o -name "*Phonesky*.apk" -o -name "*GoogleServicesFramework*.apk" \) 2>/dev/null | while read -r apk_file; do
+            find "$base" -maxdepth 3 -type f \( -name "*GmsCore*.apk" -o -name "*Phonesky*.apk" -o -name "*GoogleServicesFramework*.apk" \) 2>/dev/null | while read -r apk_file; do
                 apk_dir=$(dirname "$apk_file")
                 remove_systemless_dir "$apk_dir"
             done
@@ -135,9 +130,10 @@ fi
 ui_print "- Configuring microG permissions..."
 set_perm_recursive "$MODPATH/system/priv-app" 0 0 0755 0644
 set_perm_recursive "$MODPATH/system/etc/permissions" 0 0 0755 0644
+set_perm_recursive "$MODPATH/system/etc/default-permissions" 0 0 0755 0644
+set_perm_recursive "$MODPATH/system/etc/sysconfig" 0 0 0755 0644
 
 ui_print "**********************************************"
-ui_print "- Stock GMS & Play Store successfully replaced!"
 ui_print "- Module installation complete!"
 ui_print "- Please reboot your device."
 ui_print "**********************************************"
